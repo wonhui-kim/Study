@@ -1,2 +1,2 @@
 # study
-commit what i learned
+What i learned

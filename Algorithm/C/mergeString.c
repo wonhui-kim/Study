@@ -1,3 +1,13 @@
+/*
+ make new string(c) with inputted two string(a,b)
+ pick character with a and b one by one,
+ if one string ran out, the remains of other string go in c all together 
+ 
+ ex) input: qrstuv abc
+     output: qarbsctuv
+*/
+
+
 #include <stdio.h>
 
 void mergeStringOneByOne(char c[], char a[], char b[])

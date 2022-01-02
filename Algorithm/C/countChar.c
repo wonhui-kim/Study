@@ -1,3 +1,10 @@
+/* 
+count input character in String
+
+ex) input: t theater
+    output: 2
+*/
+
 #include <stdio.h>
 int char_num(char* p, char c)
 {

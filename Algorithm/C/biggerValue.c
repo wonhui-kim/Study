@@ -1,4 +1,14 @@
-//Æ®¸®1
+/*
+description:
+
+inputs are numbers of making tree, and key
+output is sum of tree's numbers which are bigger than key
+
+ex) input: 9 1 -2 4 6 -8 3 7
+           5
+    output: 22
+*/
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
@@ -13,16 +23,16 @@ typedef struct TreeNode {
 
 TreeNode* insert_node(TreeNode* root, int key)
 {
-	TreeNode* p, * t; // p´Â ºÎ¸ğ³ëµå, t´Â ÇöÀç³ëµå 
-	TreeNode* n;	    // nÀº »õ·Î¿î ³ëµå
+	TreeNode* p, * t; // pëŠ” ë¶€ëª¨ë…¸ë“œ, tëŠ” í˜„ì¬ë…¸ë“œ 
+	TreeNode* n;	    // nì€ ìƒˆë¡œìš´ ë…¸ë“œ
 
 	t = root;
 	p = NULL;
 
-	while (t != NULL) { // ÇöÀç³ëµå°¡ NULLÀÌ µÉ¶§±îÁö
+	while (t != NULL) { // í˜„ì¬ë…¸ë“œê°€ NULLì´ ë ë•Œê¹Œì§€
 		 //if( key == t->key ) return;
-		p = t; // ÇöÀç³ëµå¸¦ ºÎ¸ğ³ëµå·Î ÇÏ°í
-			// ÇöÀç³ëµå¸¦ ÀüÁø
+		p = t; // í˜„ì¬ë…¸ë“œë¥¼ ë¶€ëª¨ë…¸ë“œë¡œ í•˜ê³ 
+			// í˜„ì¬ë…¸ë“œë¥¼ ì „ì§„
 		if (key < t->key)
 			t = t->left;
 		else
@@ -31,22 +41,22 @@ TreeNode* insert_node(TreeNode* root, int key)
 
 	n = (TreeNode*)malloc(sizeof(TreeNode));
 	if (n == NULL) return;
-	// µ¥ÀÌÅÍ º¹»ç
+	// ë°ì´í„° ë³µì‚¬
 	n->key = key;
 	n->left = n->right = NULL;
 
-	// ºÎ¸ğ ³ëµå¿Í ¸µÅ© ¿¬°á
+	// ë¶€ëª¨ ë…¸ë“œì™€ ë§í¬ ì—°ê²°
 	if (p != NULL)
 		if (key < p->key)
 			p->left = n;
 		else
 			p->right = n;
-	else // ¾ÖÃÊ¿¡ Æ®¸®°¡ ºñ¾îÀÖ¾úÀ¸¸é
+	else // ì• ì´ˆì— íŠ¸ë¦¬ê°€ ë¹„ì–´ìˆì—ˆìœ¼ë©´
 		root = n;
 	return root;
 }
 
-int calculate_bigger_value(TreeNode* node, int key) //Á¦Ãâ
+int calculate_bigger_value(TreeNode* node, int key) //ì œì¶œ
 {
 	static int value = 0;
 

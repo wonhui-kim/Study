@@ -1,56 +1,56 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class B11660 {
-	public static int[][] matrix;
-	public static int[][] pSum;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
-
-		String[] temp = br.readLine().split(" ");
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		int n = Integer.parseInt(temp[0]);
-		int m = Integer.parseInt(temp[1]);
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int n = Integer.parseInt(st.nextToken()); //표의 크기
+		int m = Integer.parseInt(st.nextToken()); //구하는 횟수
 		
-		matrix = new int[n][n];
-		pSum = new int[n][n];
-		
-		for(int i = 0; i < n; i++) { //ǥ ä���
-			temp = br.readLine().split(" ");
+		int[][] matrix = new int[n+1][n+1];
+		for(int i = 1; i <= n; i++) {
+			st = new StringTokenizer(br.readLine());
 			int sum = 0;
-			for(int j = 0; j < n; j++) {
-				matrix[i][j] = Integer.parseInt(temp[j]);
-				sum += matrix[i][j];
-				pSum[i][j] = sum;
+			for(int j = 1; j <= n; j++) {
+				sum += Integer.parseInt(st.nextToken());
+				matrix[i][j] = sum;
 			}
 		}
 		
-		while(m-- > 0) {
-			temp = br.readLine().split(" ");
-			int s1 = Integer.parseInt(temp[0]);
-			int s2 = Integer.parseInt(temp[1]);
-			int e1 = Integer.parseInt(temp[2]);
-			int e2 = Integer.parseInt(temp[3]);
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < m; i++) {
+			st = new StringTokenizer(br.readLine());
+			int x1 = Integer.parseInt(st.nextToken());
+			int y1 = Integer.parseInt(st.nextToken());
+			int x2 = Integer.parseInt(st.nextToken());
+			int y2 = Integer.parseInt(st.nextToken());
 			
-			sb.append(sectionSum(pSum, s1, s2, e1, e2)).append('\n');
+			sb.append(sectionSum(matrix, x1, y1, x2, y2)).append('\n');
 		}
-		
-		System.out.print(sb);
+		bw.write(sb.toString());
+		bw.flush();
 	}
 	
-	public static int sectionSum(int[][] arr, int s1, int s2, int e1, int e2) {
+	public static int sectionSum(int[][] matrix, int x1, int y1, int x2, int y2) {
 		int sum = 0;
-		
-		for(int i = s1-1; i <= e1-1; i++) {
-			if(s2-1 == 0) {
-				sum += pSum[i][e2-1];
-			} else {
-				sum += pSum[i][e2-1] - pSum[i][s2-2];
-			}			
+		for(int i = x1; i <= x2; i++) {
+			sum += matrix[i][y2] - matrix[i][y1-1];
 		}
-		
 		return sum;
+	}
+	public static void print(int[][] matrix, int size) {
+		for(int i = 1; i <= size; i++) {
+			for(int j = 1; j <= size; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
 	}
 }

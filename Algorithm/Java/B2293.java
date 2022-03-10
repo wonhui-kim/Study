@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
-//¹éÁØ 2293 µ¿Àü1 (dp)
+//ë°±ì¤€ 2293 ë™ì „1 (dp)
 
 public class B2293 {
 	public static void main(String[] args) throws IOException {
@@ -13,22 +13,21 @@ public class B2293 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		int n = Integer.parseInt(st.nextToken());
-		int k = Integer.parseInt(st.nextToken());
+		int n = Integer.parseInt(st.nextToken()); //ë™ì „ êµ¬ì„±
+		int k = Integer.parseInt(st.nextToken()); //ê¸ˆì•¡ 
 		
-		int[] coins = new int[n];		
+		int[] coins = new int[n];
 		for(int i = 0; i < n; i++) {
-			coins[i] = Integer.parseInt(br.readLine()); //1 2 5
+			coins[i] = Integer.parseInt(br.readLine());
 		}
 		
 		int[] dp = new int[k+1];
 		dp[0] = 1;
-		for(int i = 0; i< n; i++) {
+		for(int i = 0; i < n; i++) {
 			for(int j = coins[i]; j <= k; j++) {
-				dp[j] += dp[j-coins[i]];
+				dp[j] += dp[j - coins[i]];
 			}
 		}
-		
 		bw.write(String.valueOf(dp[k]));
 		bw.flush();
 	}

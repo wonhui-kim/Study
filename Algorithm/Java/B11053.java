@@ -3,8 +3,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
-//¹éÁØ 11053 °¡Àå ±ä Áõ°¡ÇÏ´Â ºÎºĞ¼ö¿­ (dp)
+//ë°±ì¤€ 11053 ê°€ì¥ ê¸´ ì¦ê°€í•˜ëŠ” ë¶€ë¶„ìˆ˜ì—´ (dp)
 
 public class B11053 {
 	public static void main(String[] args) throws IOException {
@@ -15,16 +16,15 @@ public class B11053 {
 		int[] arr = new int[n];
 		int[] dp = new int[n];
 		
-		String[] temp = br.readLine().split(" ");
-		
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < n; i++) {
-			arr[i] = Integer.parseInt(temp[i]);
+			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
 		for(int i = 0; i < n; i++) {
 			dp[i] = 1;
 			for(int j = 0; j < i; j++) {
-				if(arr[j] < arr[i] && dp[i] <= dp[j]) {
+				if(arr[j] < arr[i] && dp[j] >= dp[i]) {
 					dp[i] = dp[j] + 1;
 				}
 			}

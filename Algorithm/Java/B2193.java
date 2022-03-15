@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-//¹éÁØ 2193 ÀÌÄ£¼ö (dp)
+//ë°±ì¤€ 2193 ì´ì¹œìˆ˜ (dp)
 
 public class B2193 {
 	public static void main(String[] args) throws IOException {
@@ -12,11 +12,11 @@ public class B2193 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		int n = Integer.parseInt(br.readLine());
-		
 		long[] dp = new long[n+1];
 		
 		dp[0] = 0;
 		dp[1] = 1;
+		
 		for(int i = 2; i <= n; i++) {
 			dp[i] = dp[i-1] + dp[i-2];
 		}

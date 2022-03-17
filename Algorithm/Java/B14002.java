@@ -1,47 +1,50 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
-//¹éÁØ 14002 °¡Àå ±ä Áõ°¡ÇÏ´Â ºÎºĞ¼ö¿­4 (dp)
+//ë°±ì¤€ 14002 ê°€ì¥ ê¸´ ì¦ê°€í•˜ëŠ” ë¶€ë¶„ ìˆ˜ì—´ 4 (dp)
 
 public class B14002 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		int n = Integer.parseInt(br.readLine());
 		int[] arr = new int[n];
-		int[] dp = new int[n];
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < n; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
+		int[] dp = new int[n];
+		
+		int max = 0;
 		for(int i = 0; i < n; i++) {
 			dp[i] = 1;
 			for(int j = 0; j < i; j++) {
-				if(arr[i] > arr[j] && dp[i] <= dp[j]) {
-					dp[i] = dp[j] + 1;
+				if(arr[j] < arr[i] && dp[j] >= dp[i]) {
+					dp[i] = dp[j]+1;
 				}
 			}
-		}
-		
-		int max = -1;
-		for(int i = 0; i < n; i++) {
 			max = Math.max(max, dp[i]);
 		}
 		
+		StringBuilder sb = new StringBuilder();
 		int m = max;
 		for(int i = n-1; i >= 0; i--) {
 			if(dp[i] == m) {
 				sb.insert(0, arr[i] + " ");
 				m--;
 			}
-		}		
+		}
+		
 		sb.insert(0, max + "\n");
 		
-		System.out.print(sb);		
+		bw.write(sb.toString());
+		bw.flush();
 	}
 }

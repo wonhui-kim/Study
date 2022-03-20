@@ -7,27 +7,35 @@ import java.io.OutputStreamWriter;
 //백준 9251 LCS (dp)
 
 public class B9251 {
+	public static char[] first, second;
+	public static Integer[][] dp;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		char[] first = br.readLine().toCharArray();
-		char[] second = br.readLine().toCharArray();
-		int[][] lcs = new int[first.length+1][second.length+1];
+		first = br.readLine().toCharArray();
+		second = br.readLine().toCharArray();
+		dp = new Integer[first.length][second.length];
 		
-		for(int i = 0; i <= first.length; i++) {
-			for(int j = 0; j <= second.length; j++) {
-				if(i==0 || j==0) {
-					lcs[i][j] = 0;
-				} else if(first[i-1] == second[j-1]) {
-					lcs[i][j] = lcs[i-1][j-1] + 1;
-				} else {
-					lcs[i][j] = Math.max(lcs[i-1][j], lcs[i][j-1]);
-				}
+		bw.write(String.valueOf(lcs(first.length-1, second.length-1)));
+		bw.flush();
+	}
+	
+	public static int lcs(int x, int y) {
+		if(x == -1 || y == -1) {
+			return 0;
+		}
+		
+		if(dp[x][y] == null) {
+			dp[x][y] = 0;
+			
+			if(first[x] == second[y]) {
+				dp[x][y] = lcs(x-1, y-1) + 1;
+			} else {
+				dp[x][y] = Math.max(lcs(x-1, y), lcs(x, y-1));
 			}
 		}
 		
-		bw.write(String.valueOf(lcs[first.length][second.length]));
-		bw.flush();
+		return dp[x][y];
 	}
 }

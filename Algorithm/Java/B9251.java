@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-//πÈ¡ÿ 9251 LCS (dp)
+//Î∞±Ï§Ä 9251 LCS (dp)
 
 public class B9251 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		char[] first = br.readLine().toCharArray(); //ACAYKP
-		char[] second = br.readLine().toCharArray(); //CAPCAK
+		char[] first = br.readLine().toCharArray();
+		char[] second = br.readLine().toCharArray();
 		int[][] lcs = new int[first.length+1][second.length+1];
 		
 		for(int i = 0; i <= first.length; i++) {

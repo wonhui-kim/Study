@@ -1,49 +1,53 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-
-//¹éÁØ 10815 ¼ıÀÚ Ä«µå (binary search)
 
 public class B10815 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		StringBuilder sb = new StringBuilder();
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		int n = Integer.parseInt(br.readLine());
-		int[] arr = new int[n];
+		int n = Integer.parseInt(br.readLine()); //ìƒê·¼ì´ ì¹´ë“œ ê°œìˆ˜
+		int[] own = new int[n];
 		
-		st = new StringTokenizer(br.readLine());
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < n; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
+			own[i] = Integer.parseInt(st.nextToken());
 		}
-		Arrays.sort(arr); //¿À¸§Â÷¼ø Á¤·Ä
 		
-		int m = Integer.parseInt(br.readLine());
+		Arrays.sort(own); //ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
+		
+		int m = Integer.parseInt(br.readLine()); //ì£¼ì–´ì§„ ì¹´ë“œ ê°œìˆ˜
+		
+		StringBuilder sb = new StringBuilder();
 		st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < m; i++) {
-			int r = binarySearch(arr, Integer.parseInt(st.nextToken()));
-			sb.append(r).append(' ');
+			sb.append(binarySearch(Integer.parseInt(st.nextToken()), own)).append(' ');
 		}
-		System.out.print(sb);
+		
+		bw.write(sb.toString());
+		bw.flush();
 	}
-	public static int binarySearch(int[] arr, int target) {
+	public static int binarySearch(int target, int[] arr) {
 		int start = 0;
 		int end = arr.length - 1;
 		int mid = (start+end)/2;
 		
 		while(end-start >= 0) {
-			if(target == arr[mid]) {
+			if(arr[mid] == target) {
 				return 1;
-			} else if(target > arr[mid]) {
+			} else if(arr[mid] <= target) {
 				start = mid + 1;
-			} else {
+			} else if(arr[mid] > target) {
 				end = mid - 1;
 			}
 			mid = (start+end)/2;
-		}		
+		}
+		
 		return 0;
 	}
 }
